@@ -3,8 +3,11 @@ package fr.remram.timetodo;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import fr.remram.timetodo.data.DataManager;
 
 public class TodoList extends Activity {
@@ -18,6 +21,17 @@ public class TodoList extends Activity {
         setContentView(R.layout.activity_todo_list);
 
         database = new DataManager(this);
+
+        String[] debug_items = {"Some task", "Other task", "And the last one"};
+        ArrayAdapter debug_adapter = new ArrayAdapter<String>(
+                this,
+                R.layout.task_list_entry,
+                debug_items);
+
+        ListView task_list = (ListView)findViewById(
+                R.id.view_task_list);
+        Log.v("TodoList", "task_list: " + task_list);
+        task_list.setAdapter(debug_adapter);
     }
 
     @Override
