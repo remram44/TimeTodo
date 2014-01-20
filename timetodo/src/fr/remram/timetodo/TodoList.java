@@ -1,8 +1,10 @@
 package fr.remram.timetodo;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class TodoList extends Activity {
 
@@ -19,6 +21,23 @@ public class TodoList extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.todo_list, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        // Handle item selection
+        switch(item.getItemId())
+        {
+        case R.id.action_new_task:
+            {
+                Intent add_task = new Intent(this, AddTask.class);
+                startActivity(add_task);
+                return true;
+            }
+        default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 
 }
