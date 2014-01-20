@@ -5,14 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import fr.remram.timetodo.data.DataManager;
 
 public class TodoList extends Activity {
+
+    private DataManager database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_list);
+
+        database = new DataManager(this);
     }
 
     @Override
