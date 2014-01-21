@@ -1,5 +1,6 @@
 package fr.remram.timetodo;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,11 +27,6 @@ public class TaskManager {
                     "    " + TASK_NAME + " TEXT NOT NULL," +
                     "    " + TASK_PERIOD + " INTEGER NOT NULL" +
                     ");");
-            // DEBUG
-            db.execSQL(
-                    "INSERT INTO " + TASKS_TABLE +
-                    "(" + TASK_NAME + ", " + TASK_PERIOD + ")" +
-                    "VALUES('First task', 3600);");
         }
 
         @Override
@@ -64,6 +60,15 @@ public class TaskManager {
                 null,                                   // groupBy
                 null,                                   // having
                 TASK_NAME);                             // orderBy
+    }
+
+    public void createTask(String name, int period)
+    {
+        SQLiteDatabase db = database.getWritableDatabase();
+        ContentValues values = new ContentValues(2);
+        values.put(TASK_NAME, name);
+        values.put(TASK_PERIOD, period);
+        db.insert(TASKS_TABLE, null, values);
     }
 
 }

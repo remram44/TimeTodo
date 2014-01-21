@@ -14,7 +14,7 @@ import android.widget.SimpleCursorAdapter;
 
 public class TodoList extends ListActivity {
 
-    private TaskManager m_Database;
+    private TaskManager m_Database = null;
 
     // This is the Adapter being used to display the list's data
     SimpleCursorAdapter m_Adapter;
@@ -28,8 +28,6 @@ public class TodoList extends ListActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        deleteDatabase("TimeTodo"); // DEBUG
 
         m_Database = new TaskManager(this);
 
@@ -59,6 +57,15 @@ public class TodoList extends ListActivity {
                 toViews,
                 0);
         setListAdapter(m_Adapter);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+        if(m_Database != null)
+            m_Adapter.swapCursor(m_Database.getTasksCursor());
     }
 
     @Override
