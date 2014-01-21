@@ -1,37 +1,64 @@
 package fr.remram.timetodo;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ListView;
-import fr.remram.timetodo.data.DataManager;
+import android.widget.ProgressBar;
+import android.widget.SimpleCursorAdapter;
 
-public class TodoList extends Activity {
+public class TodoList extends ListActivity {
 
-    private DataManager database;
+    private TaskManager m_Database;
+
+    // This is the Adapter being used to display the list's data
+    SimpleCursorAdapter m_Adapter;
+
+    // These are the Contacts rows that we will retrieve
+    static final String[] PROJECTION = new String[] {
+            TaskManager.TASK_NAME,
+            TaskManager.TASK_PERIOD};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_todo_list);
 
-        database = new DataManager(this);
+        deleteDatabase("TimeTodo"); // DEBUG
 
-        String[] debug_items = {"Some task", "Other task", "And the last one"};
-        ArrayAdapter debug_adapter = new ArrayAdapter<String>(
+        m_Database = new TaskManager(this);
+
+        // Create a progress bar to display while the list loads
+        ProgressBar progressBar = new ProgressBar(this);
+        progressBar.setLayoutParams(new LayoutParams(
+                LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT));
+        progressBar.setIndeterminate(true);
+        getListView().setEmptyView(progressBar);
+
+        // Must add the progress bar to the root of the layout
+        ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
+        root.addView(progressBar);
+
+        // For the cursor adapter, specify which columns go into which views
+        String[] fromColumns = {TaskManager.TASK_NAME};
+        int[] toViews = {android.R.id.text1};
+
+        // Create an empty adapter we will use to display the loaded data.
+        // We pass null for the cursor, then update it in onLoadFinished()
+        m_Adapter = new SimpleCursorAdapter(
                 this,
-                R.layout.task_list_entry,
-                debug_items);
-
-        ListView task_list = (ListView)findViewById(
-                R.id.view_task_list);
-        Log.v("TodoList", "task_list: " + task_list);
-        task_list.setAdapter(debug_adapter);
+                android.R.layout.simple_list_item_1,
+                m_Database.getTasksCursor(),
+                fromColumns,
+                toViews,
+                0);
+        setListAdapter(m_Adapter);
     }
 
     @Override
@@ -59,4 +86,9 @@ public class TodoList extends Activity {
         }
     }
 
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id)
+    {
+        // TODO : task clicked
+    }
 }
