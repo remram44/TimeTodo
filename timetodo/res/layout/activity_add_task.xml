@@ -11,9 +11,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AddTask" >
 
-    <TextView
+    <GridLayout
+        android:id="@+id/add_task_grid"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:columnWidth="90dp"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/add_task_lbl_name"
+            android:text="@string/add_task_name" />
+
+        <EditText
+            android:id="@+id/add_task_name"
+            android:layout_width="fill_parent"
+            android:hint="@string/add_task_name_hint"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/add_task_lbl_period"
+            android:text="@string/add_task_period" />
+
+        <EditText
+            android:id="@+id/add_task_period"
+            android:layout_width="fill_parent"
+            android:hint="@string/add_task_period_hint"
+            android:inputType="number" />
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/add_task_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TODO : Add Task" />
+        android:layout_below="@id/add_task_grid"
+        android:layout_alignParentRight="true"
+        android:text="@string/add_task_save" />
 
 </RelativeLayout>

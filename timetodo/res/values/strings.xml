@@ -3,9 +3,15 @@
 <resources>
 
     <string name="app_name">TimeTodo</string>
-    <string name="action_new_task">Add task</string>
-    <string name="hello_world">Hello world!</string>
+
     <string name="title_activity_todo_list">Todo list</string>
+    <string name="action_new_task">Add task</string>
+
     <string name="title_activity_add_task">Add a task</string>
+    <string name="add_task_name">Title:</string>
+    <string name="add_task_name_hint">What to do</string>
+    <string name="add_task_period">Period:</string>
+    <string name="add_task_period_hint">Period in second</string>
+    <string name="add_task_save">Save</string>
 
 </resources>
