@@ -11,37 +11,41 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AddTask" >
 
-    <GridLayout
+    <android.support.v7.widget.GridLayout
+        xmlns:grid="http://schemas.android.com/apk/res-auto"
         android:id="@+id/add_task_grid"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:columnWidth="90dp"
         android:columnCount="2"
-        android:rowCount="2"
-        android:verticalSpacing="10dp"
-        android:horizontalSpacing="10dp"
-        android:stretchMode="columnWidth"
-        android:gravity="center" >
+        android:rowCount="2" >
 
         <TextView
-            android:text="@string/add_task_name" />
+            android:text="@string/add_task_name"
+            grid:layout_row="0"
+            grid:layout_column="0" />
 
         <EditText
             android:id="@+id/add_task_name"
             android:layout_width="fill_parent"
+            grid:layout_row="0"
+            grid:layout_column="1"
             android:hint="@string/add_task_name_hint"
             android:inputType="text" />
 
         <TextView
-            android:text="@string/add_task_period" />
+            android:text="@string/add_task_period"
+            grid:layout_row="1"
+            grid:layout_column="0" />
 
         <EditText
             android:id="@+id/add_task_period"
             android:layout_width="fill_parent"
+            grid:layout_row="1"
+            grid:layout_column="1"
             android:hint="@string/add_task_period_hint"
             android:inputType="number" />
 
-    </GridLayout>
+    </android.support.v7.widget.GridLayout>
 
     <Button
         android:layout_width="wrap_content"
