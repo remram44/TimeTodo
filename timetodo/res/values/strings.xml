@@ -5,6 +5,7 @@
     <string name="app_name">TimeTodo</string>
     <string name="action_new_task">Add task</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_todo_list">Todo list</string>
     <string name="title_activity_add_task">Add a task</string>
 
 </resources>
