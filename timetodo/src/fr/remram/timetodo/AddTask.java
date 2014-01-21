@@ -22,6 +22,7 @@ public class AddTask extends Activity {
         String name = name_view.getText().toString();
 
         EditText period_view = (EditText)findViewById(R.id.add_task_period);
+        // TODO : catch NumberFormatException
         int period = Integer.parseInt(period_view.getText().toString());
 
         database.createTask(name, period);
